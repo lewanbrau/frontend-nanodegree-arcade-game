@@ -13,7 +13,7 @@ var Enemy = function(start, row, speed) {
     //Translated into a y value so that the y location doesn't have to be
     //looked up for each fame.
     this.y = enemyRow[row];
-    this.speed = speed
+    this.speed = speed;
     this.sprite = 'images/enemy-bug.png';
 };
 
@@ -63,7 +63,7 @@ Enemy.prototype.collision = function() {
     //collision calculations
     if (player.row === this.row){
         //iterates on the column numbers
-        for (i = 1; i < 6; i++){
+        for (var i = 1; i < 6; i++){
             // checks to see if the bug is in the kill zone for each column. Because
             // a bug can be in the kill zone of more than one column at a time I chose this way
             // to detect.  
@@ -74,10 +74,10 @@ Enemy.prototype.collision = function() {
                 if (this.column === player.column){
                     player.row = 1;
                     player.column = 3;
-                };
-            };
-        };
-    };
+                }
+            }
+        }
+    }
 };
 
 Enemy.prototype.update = function(dt) {
@@ -91,7 +91,7 @@ Enemy.prototype.update = function(dt) {
     this.x = (this.x + this.speed * dt);
     if (this.x > 500){
         this.x = -200;
-    };
+    }
 
     //collision detection takes place at this point.
     this.collision();
@@ -117,20 +117,20 @@ var Player = function(){
 
 Player.prototype.update = function(dt) {
     //when the player hits the water, they win and go back to the beginning. They've won!
-    if (player.row > 5){
-        player.row = 1
-    };
+    if (this.row > 5){
+        this.row = 1;
+    }
 
     //keeps the player in the zone
-    if (player.row < 1){
-        player.row = 1
-    };
-    if (player.column < 1){
-        player.column = 1
-    };
-    if (player.column > 5){
-        player.column = 5
-    };
+    if (this.row < 1){
+        this.row = 1;
+    }
+    if (this.column < 1){
+        this.column = 1;
+    }
+    if (this.column > 5){
+        this.column = 5;
+    }
 };
 
 Player.prototype.render = function() {
@@ -144,16 +144,16 @@ Player.prototype.handleInput = function(button) {
     // checks to keep him in the zone and win are in the update function.
     if (button === 'left') {
         this.column = this.column - 1;
-    };
+    }
     if (button === 'up') {
         this.row = this.row + 1;
-    };
+    }
     if (button === 'right') {
         this.column = this.column + 1;
-    };
+    }
     if (button === 'down') {
         this.row = this.row - 1;
-    };
+    }
 };
 
 // Now instantiate your objects.
@@ -162,17 +162,17 @@ Player.prototype.handleInput = function(button) {
 
 // Creates the player. Because there arent any options on creating him,
 // there are no values passed into the constructor.
-player = new Player();
+var player = new Player();
 
 // enemy creation. Their initial position, row and speed are set 
 // here for the constructor.
-enemy1 = new Enemy(-103, 3, 100);
-enemy2 = new Enemy(-150, 4, 170);
-enemy3 = new Enemy(-222, 5, 230);
-enemy4 = new Enemy(-270, 5, 110);
+var enemy1 = new Enemy(-103, 3, 100);
+var enemy2 = new Enemy(-150, 4, 170);
+var enemy3 = new Enemy(-222, 5, 230);
+var enemy4 = new Enemy(-270, 5, 110);
 
 //array holding all the enemies.
-allEnemies = [enemy1, enemy2, enemy3, enemy4];
+var allEnemies = [enemy1, enemy2, enemy3, enemy4];
 
 
 
